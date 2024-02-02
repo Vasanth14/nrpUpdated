@@ -1,0 +1,388 @@
+import React, { useEffect , useState} from "react";
+import { Text, View, StyleSheet, Alert } from "react-native";
+import Constants from "expo-constants";
+import DropDownPicker from 'react-native-dropdown-picker';
+
+import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { WizardStore } from "../store";
+
+import { Button, MD3Colors, ProgressBar, TextInput, ScrollView,PaperButton,Card as PaperCard } from "react-native-paper";
+import { useIsFocused } from "@react-navigation/native";
+
+export default function Confirmation({ navigation }) {
+  useEffect(() => {
+    console.log("formData", formData);
+    console.log("consumablesData", consumablesData);
+    console.log("tooltacklesData", tooltacklesData);
+    console.log("instrumentData", instrumentData);
+    console.log("safetyTool", safetyTool);
+  }, [formData, consumablesData, tooltacklesData, instrumentData, safetyTool]);
+  // const onSubmit = () => {
+   
+  //   // navigation.navigate(OperationalConsumables);
+  // };
+  const { formData } = {
+    "formData": [
+      {
+        "Machine": "Machine 1",
+        "OpeningKM": "100",
+        "ClosingKM": "200",
+        "FuelQty": "50",
+        "FuelCostPerLiter": "2.5"
+      },
+      {
+        "Machine": "Machine 2",
+        "OpeningKM": "150",
+        "ClosingKM": "250",
+        "FuelQty": "60",
+        "FuelCostPerLiter": "2.8"
+      },
+      // Add more machines as needed
+    ]
+  }
+
+  const { consumablesData } = {
+    "consumablesData": [
+      {
+        "Description": "Consumables 1",
+        "Quantity": "94"
+      },
+      {
+        "Description": "Consumables 2",
+        "Quantity": "111"
+      },
+    ]
+  }
+
+  const { tooltacklesData } = {
+    "tooltacklesData": [
+      {
+        "Description": "Tool Tackles 1",
+        "Quantity": "5"
+      },
+      {
+        "Description": "Tool Tackles 2",
+        "Quantity": "8"
+      },
+    ]
+  }
+
+  const { instrumentData } = {
+    "instrumentData": [
+      {
+        "Description": "Instrument 1",
+        "Quantity": "5"
+      },
+      {
+        "Description": "Instrument 2",
+        "Quantity": "8"
+      },
+      // Add more instruments as needed
+    ]
+  }
+
+  const { safetyTool } = {
+    "safetyTool": [
+      {
+        "Description": "SafetyTool 1",
+        "Quantity": "11"
+      },
+      {
+        "Description": "SafetyTool 2",
+        "Quantity": "19"
+      },
+      // Add more instruments as needed
+    ]
+  }
+  
+
+
+  return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <View style={styles.container}>
+      <Text style={styles.title}>Confirmation Screen</Text>
+      {/* {/* <PaperButton
+          mode="outlined"
+          onPress={(onSubmit)}
+          style={[styles.button]}
+        >
+          <Text style={styles.titleStyle}>Submit</Text>
+        </PaperButton> */}
+      <View>
+
+      <Text style={styles.title}>Man Power</Text>
+          <PaperCard style={styles.card}>
+            <PaperCard.Content>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Product:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>A1</Text>
+                </View>
+                </View>
+                <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Project Company</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>Balanetra</Text>
+                </View>
+              </View>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Location</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>Trichy</Text>
+                </View>
+              </View>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Date</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>03-10-2023</Text>
+                </View>
+              </View>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Chainage</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>Test Chainage</Text>
+                </View>
+              </View>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Project Master</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>project master 2</Text>
+                </View>
+              </View>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Activity</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>Activity 1</Text>
+                </View>
+              </View>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Job Identification</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>tesst</Text>
+                </View>
+              </View>
+            </PaperCard.Content>
+          </PaperCard>
+
+      <Text style={styles.title}>Consumables</Text>
+        {consumablesData.map((instrument, index) => (
+          <PaperCard key={index} style={styles.card}>
+            <PaperCard.Content>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Description:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{instrument.Description}</Text>
+                </View>
+                </View>
+                <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Quantity:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{instrument.Quantity}</Text>
+                </View>
+              </View>
+            </PaperCard.Content>
+          </PaperCard>
+        ))}
+
+      <Text style={styles.title}>Tools And Tackles</Text>
+        {tooltacklesData.map((instrument, index) => (
+          <PaperCard key={index} style={styles.card}>
+            <PaperCard.Content>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Description:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{instrument.Description}</Text>
+                </View>
+                </View>
+                <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Quantity:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{instrument.Quantity}</Text>
+                </View>
+              </View>
+            </PaperCard.Content>
+          </PaperCard>
+        ))}
+
+      <Text style={styles.title}>Instrument</Text>
+        {instrumentData.map((instrument, index) => (
+          <PaperCard key={index} style={styles.card}>
+            <PaperCard.Content>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Description:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{instrument.Description}</Text>
+                </View>
+                </View>
+                <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Quantity:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{instrument.Quantity}</Text>
+                </View>
+              </View>
+            </PaperCard.Content>
+          </PaperCard>
+        ))}
+
+      <Text style={styles.title}>Safety Tool</Text>
+        {safetyTool.map((instrument, index) => (
+          <PaperCard key={index} style={styles.card}>
+            <PaperCard.Content>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Description:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{instrument.Description}</Text>
+                </View>
+                </View>
+                <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Quantity:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{instrument.Quantity}</Text>
+                </View>
+              </View>
+            </PaperCard.Content>
+          </PaperCard>
+        ))}
+
+        {/* <Text style={styles.title}>Instrument</Text>
+        {instrumentData.map((instrument, index) => (
+          <PaperCard key={index} style={styles.card}>
+            <PaperCard.Content>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Description:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{instrument.Description}</Text>
+                </View>
+                </View>
+                <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Quantity:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{instrument.Quantity}</Text>
+                </View>
+              </View>
+            </PaperCard.Content>
+          </PaperCard>
+        ))} */}
+
+      <Text style={styles.title}>Machinery</Text>
+        {/* Machinery Data */}
+        {formData.map((item, index) => (
+          <PaperCard key={index} style={styles.card}>
+            <PaperCard.Content>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Machine:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{item.Machine}</Text>
+                </View>
+              </View>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Opening KM:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{item.OpeningKM}</Text>
+                </View>
+              </View>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Closing KM:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{item.ClosingKM}</Text>
+                </View>
+              </View>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Fuel Qty:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{item.FuelQty}</Text>
+                </View>
+              </View>
+              <View style={styles.row}>
+                <View style={styles.column}>
+                  <Text style={styles.label}>Fuel Cost Per Liter:</Text>
+                </View>
+                <View style={styles.column}>
+                  <Text>{item.FuelCostPerLiter}</Text>
+                </View>
+              </View>
+            </PaperCard.Content>
+          </PaperCard>
+        ))}
+
+      </View> 
+    </View>
+    </ScrollView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FBFAEB',
+    paddingHorizontal: 16,
+    paddingTop: 40,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  card: {
+    marginBottom: 16,
+  },
+  row: {
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  column: {
+    flex: 1,
+  },
+  label: {
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
+  scrollContainer: {
+    flexGrow: 1,
+  },
+});
+
