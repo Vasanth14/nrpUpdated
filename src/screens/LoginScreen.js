@@ -47,24 +47,24 @@ const LoginView = ({ navigation }) => {
   const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   const onLoginPress = () => {
-    // setIsLoading(true);
-    // axios
-    //   .post(apiUrl + "auth/login", { username, password })
-    //   .then((res) => {
-    //     setIsLoading(false);
-    //     const token = res.data.tokens.access.token;
-    //     SecureStore.setItemAsync("token", token);
-    //     navigation.navigate(AddOperationData);
-    //   })
-    //   .catch((error) => {
-    //     console.log("re" + error);
-    //     setIsLoading(false);
-    //     setShowErrorAlert(true);
-    //   });
+    setIsLoading(true);
+    axios
+      .post(apiUrl + "auth/login", { username, password })
+      .then((res) => {
         setIsLoading(false);
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWE4ZGVjMzUzMGFjMDk1NzVlNDI2MTQiLCJpYXQiOjE3MDY4NTMyNzksImV4cCI6MTcwNjkzOTY3OSwidHlwZSI6ImFjY2VzcyJ9.BVQYZufVr1ChUURoTbkw9Ezp6H1qSCMlLMqu7rssVUs";
+        const token = res.data.tokens.access.token;
         SecureStore.setItemAsync("token", token);
-        navigation.navigate(OperationalDataScreen);
+        navigation.navigate(AddOperationData);
+      })
+      .catch((error) => {
+        console.log("re" + error);
+        setIsLoading(false);
+        setShowErrorAlert(true);
+      });
+        // setIsLoading(false);
+        // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWE4ZGVjMzUzMGFjMDk1NzVlNDI2MTQiLCJpYXQiOjE3MDY4NTMyNzksImV4cCI6MTcwNjkzOTY3OSwidHlwZSI6ImFjY2VzcyJ9.BVQYZufVr1ChUURoTbkw9Ezp6H1qSCMlLMqu7rssVUs";
+        // SecureStore.setItemAsync("token", token);
+        // navigation.navigate(OperationalDataScreen);
   };
 
   return (
