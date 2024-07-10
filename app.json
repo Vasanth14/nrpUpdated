@@ -4,10 +4,10 @@
     "slug": "nrp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,15 +18,24 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 14,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/logo.png",
         "backgroundColor": "#ffffff"
       },
-        "package": "com.mosy.nrp"
-      },
-    "web": {
-      "favicon": "./assets/images/favicon.png"
+      "package": "com.mosy.nrp"
     },
-    "owner": "jiivakarthick"
+    "web": {
+      "favicon": "./assets/images/logo.png"
+    },
+    "owner": "vasanthrc",
+    "plugins": [
+      "expo-build-properties"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a30eae6b-7821-46c3-bccb-9a60278ff67d"
+      }
+    }
   }
 }
